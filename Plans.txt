@@ -1,0 +1,26 @@
+Key:  ** == Update
+
+TODO LIST
+
+implement experience system **started implementation not even close to complete... need to rescale exp required for level up or
+exp enemys give
+
+fix input detection
+fix store usability
+
+implement later stages of enemys
+implement other mob sections
+implement some sort of boss for the first area
+
+Finished Todo List Items
+
+implement monster loot drop system
+
+Separate Into Files **Separated some But Not all that I wanted to. encounter problems porting
+
+*implement revive system ***Not Sure If That's The Direction I Want To Take This*** **Revives implemented through saves
+
+Global Variables seem to be something that is widely frowned upon. hopefully me of the future finds of a way to pass variables 
+More consistently by that I mean the amount of data that has to be supplied, versus the fact that these functions dont have the 
+correct scope 
+**Kind of Fixed it
