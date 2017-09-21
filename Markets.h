@@ -156,6 +156,7 @@ void creepyLady(){
 		}
 		else if(input == 1 && player.gold < 10){
 			cout << "Insufficient funds\n";
+			leave = true;
 		}
 		else {
 			cout << "No hearts left to purchase\n";
