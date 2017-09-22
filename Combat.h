@@ -52,11 +52,10 @@ void Inventory(){
 		 << player.item.defCrystal << 			  " defense crystal(s)  (3)\n"
 		 << 									  "Leave                 (4)\n";
 
-	int input;
-	cin >> input;
+	char input = getInput();
 
 	switch (input) {
-		case 1 :
+		case '1' :
 			if(player.item.potion){
 				int temp = player.currHp;
 				player.item.potion -= 1;
@@ -66,7 +65,7 @@ void Inventory(){
 				attack(player.name, enemy.atk, player.currHp, enemy.crit, player.def);
 			}
 			break;
-		case 2 :
+		case '2' :
 			if(player.item.atkCrystal){
 				player.atk += player.item.buffAmount;
 				player.item.atkCrystal -= 1;
@@ -76,7 +75,7 @@ void Inventory(){
 				player.atk -= player.item.buffAmount;
 				}
 			break;
-		case 3 :
+		case '3' :
 			if(player.item.defCrystal){
 				player.def += player.item.buffAmount;
 				player.item.defCrystal -= 1;

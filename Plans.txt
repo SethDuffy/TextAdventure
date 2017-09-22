@@ -5,8 +5,12 @@ TODO LIST
 implement experience system **started implementation not even close to complete... need to rescale exp required for level up or
 exp enemys give
 
-fix input detection
+
 fix store usability
+
+input in combat of more than three characters causes a floating point exception
+input in combat other than the designated numbers causes the death message to be displayed multiple times
+
 
 implement later stages of enemys
 implement other mob sections
@@ -24,3 +28,6 @@ Global Variables seem to be something that is widely frowned upon. hopefully me 
 More consistently by that I mean the amount of data that has to be supplied, versus the fact that these functions dont have the 
 correct scope 
 **Kind of Fixed it
+
+fix input detection **fixed for the most part. see above for further problems with input
+

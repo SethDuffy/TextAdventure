@@ -105,6 +105,12 @@ int clamp(int x, int y, int var){
 	else
 		return var;
 }
+char getInput(){
+	char input;
+	cin >> input;
+	cout << endl;
+	return input;
+}
 void displayStats(){
 	cout << "Name             " << player.name << endl
 		 << "Health           " << player.currHp << endl

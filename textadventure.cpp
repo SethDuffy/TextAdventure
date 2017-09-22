@@ -63,35 +63,39 @@ void hospital(){
 	cout << "A nurse approaches you\nYou Have " << player.gold << " gold\nWhat will you do\n(1)Heal(" 
 		 << player.maxHp / 4 <<  "g)\n(2)Run Away(0g)\n";
 
-	int input;
+	char input;
 	cin >> input;
 	cout << endl;
-	if(input == 1 && player.gold >= (player.maxHp / 4)){
+	if(input == '1' && player.gold >= (player.maxHp / 4)){
 		player.currHp = player.maxHp;
 		player.gold -= player.maxHp / 4;
 		cout << "You were fully Healed\n";
 	}
-	else if(input != 1)
+	else if(input == '2')
 		return;
+    else if(player.gold < player.maxHp / 4 && input == '1'){
+        cout << "Insufficient funds\nYou Have " << player.gold << " gold\n";
+    }
 	else {
-		cout << "Insufficient funds\nYou Have " << player.gold << " gold\n";
+		hospital();
 	}
 	return;
 }
 void options(){
 	cout << "(1)See Stats\n(2)Save Game\n(3)Leave\n";
 
-	int input;
-	cin >> input;
-	cout << endl;
+	char input = getInput();
 
 	switch (input){
-		case 1 :
+		case '1' :
 			displayStats();
 			break;
-		case 2 : 
+		case '2' : 
 			save();
 			break;
+        default :
+            options();
+            break;
 	}
 	return;
 }
@@ -137,7 +141,6 @@ void levelUp(){
 	return;
 }
 void encounter(){ //logic for what happens if the player enters an encounter
-	int input;
 	//sets stats for enemy
 	enemyDecl();
 	//displays stats of the player
@@ -147,24 +150,26 @@ void encounter(){ //logic for what happens if the player enters an encounter
 
 	while(player.currHp > 0 && enemy.currHp > 0){
 		cout << "(1)Attack (2)Flee (3)Inventory\n";
-		cin >> input;
-		cout << endl;
 
-		if(input == 1){
+		char input = getInput();
+
+		if(input == '1'){
 			attack(player.name, enemy.atk, player.currHp, enemy.crit, player.def);
 			attack(enemy.name, player.atk, enemy.currHp, player.crit, enemy.def);
+			playerStatus();
+			enemyStatus();
 
 		}
-		else if(input == 2){
+		else if(input == '2'){
 			//If Flee Returns true return to town
 			if(flee("enemy", player.atk, enemy.atk))
 				return;
 		}
-		else if(input == 3){
+		else if(input == '3'){
 			Inventory();
 		}
-		playerStatus();
-		enemyStatus();
+		else 
+			encounter();
 	}
 	levelUp();
 	if(enemy.currHp < 1 && player.currHp > 0){
@@ -178,27 +183,25 @@ void town(){
 	//Main hub for the player to navigate through
 	cout << "You enter a small town\nWhere do you go?\n(1)Forest\n(2)Market\n(3)Hospital\n(4)Save\n(5)Options\n(6)End it all\n";
 
-	int input;
-	cin >> input;
-	cout << endl;
+	char input = getInput();
 
 	switch (input){
-		case 1 : 
+		case '1' : 
 			encounter();
 			break;
-		case 2 :
+		case '2' :
 			market1();
 			break;
-		case 3 :
+		case '3' :
 			hospital();
 			break;
-		case 4 :
+		case '4' :
 			save();
 			break;
-		case 5 :
+		case '5' :
 			options();
 			break;
-		case 6 :
+		case '6' :
 				player.currHp = 0;
 				cout << "ded\n";
 				break;
@@ -210,12 +213,11 @@ void town(){
 int main(){
 	srand(time(NULL));
 
-	int input;
 	cout << "\n(1)Load Old File?\n(2)Start New File?\n";
-	cin >> input;
-	cout << endl;
 
-	if(input == 2){
+	char input = getInput();
+
+	if(input == '2'){
    	 	player.maxHp = 10;
    	 	player.currHp = player.maxHp;
   		player.atk = 2;
@@ -233,8 +235,14 @@ int main(){
    	 	playerStatus();
 
    	}
-   	else if(input == 1)
+   	else if(input == '1')
    		loadSave();
+   	else
+   		main();
+   	if(player.atk < 1){
+   		cout << "No File Found\n";
+   		main();
+   	}
 	do{
 		town();
 	}
